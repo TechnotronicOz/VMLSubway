@@ -1,0 +1,223 @@
+script(id="chat_application", type="text/html")
+  .sidebar
+    #logo
+      img(src='/assets/images/vml_logo.png')
+    h2 Subway
+      br
+      small IRC Client
+    #user-box
+    #channels
+      #slide-prev.slide
+      #slide-next.slide
+  .content
+
+script(id="load_image", type="text/html")
+  img(id="loading_image", src="/assets/images/loading.gif")
+
+script(id="overview_home", type="text/html")
+  ul
+    li.overview_button#connection
+      img(src="/assets/images/connection.svg")
+      span New Connection
+    li.overview_button#settings
+      img(src="/assets/images/settings.svg")
+      span Settings
+    li.overview_button#login
+      img(src="/assets/images/login.svg")
+      span Login
+    li.overview_button#register
+      img(src="/assets/images/register.svg")
+      span Register
+
+script(id="overview", type="text/html")
+  #overview
+
+script(id="overview_connection", type="text/html")
+  #home_parent
+    a.overview_button#home Home
+  form.form-inline
+    .control-group
+      label(for="connect-nick") Nick
+      input#connect-nick(type="text")
+    .control-group
+      label(for="connect-server") Server
+      input#connect-server(type="text")
+    .control-group
+      label(for="connect-password") Password (optional)
+      input#connect-password(type="password")
+    .control-group
+      label(for="connect-realName") Real Name
+      input#connect-realName(type="text")
+    .connect-more-options.hide
+      .control-group
+        label(for="connect-port") Port
+        input#connect-port.input-small(type="text", placeholder="6667")
+      .control-group
+        label(for="connect-secure") SSL
+        input#connect-secure(type="checkbox")
+      .control-group#ssl-self-signed
+        label(for="connect-selfSigned") Self-signed SSL Cert
+        input#connect-selfSigned(type="checkbox")
+      .control-group
+        label(for="connect-away") Away Message
+        input#connect-away(type="text", placeholder="AFK")
+      .control-group
+        label(for="connect-rejoin") Bouncer Mode
+        input#connect-rejoin(type="checkbox")
+      .control-group
+        label(for="connect-encoding") Encoding
+        select#connect-encoding
+          option(value="", selected="selected") UTF-8
+          option(disabled="disabled") --------------
+          option(value="ISO-8859-1") ISO-8859-1
+          option(value="ISO-8859-15") ISO-8859-15
+          option(value="ISO-8859-2") ISO-8859-2
+          option(value="ISO-8859-7") ISO-8859-7 (Greek)
+          option(value="ISO-8859-8") ISO-8859-8 (Hebrew)
+          option(value="ISO-8859-9") ISO-8859-9 (Turkish)
+          option(value="ISO-8859-11") ISO-8859-11 (Thai)
+          option(disabled="disabled") --------------
+          option(value="ISO-2022-JP") ISO-2022-JP (Japanese)
+          option(value="CP949") CP949 (Korean)
+          option(value="EUC-KR") EUC-KR (Korean)
+          option(value="GBK") GBK (Chinese)
+          option(value="GB18030") GB18030 (Chinese)
+          option(value="BIG5") BIG5 (Chinese)
+          option(disabled="disabled") --------------
+          option(value="KOI8-U") KOI8-U (Ukrainian)
+          option(value="KOI8-R") KOI8-R (Cyrillic)
+          option(value="CP1251") CP1251 (Cyrillic)
+          option(value="CP1256") CP1256 (Arabic)
+          option(value="CP1257") CP1257 (baltic)
+    .control-group
+      {{#loggedIn}}
+      label.checkbox(for="connect-keep-alive", style="width:100%") Keep connection alive after browser closed
+        input#connect-keep-alive(type="checkbox")
+      {{/loggedIn}}
+    a(id="connect-button", class="btn btn-primary spacing-right", type="button") Connect
+    a(id="connect-more-options-button", class="btn", type="button") More Options
+
+script(id="overview_settings", type="text/html")
+  #home_parent
+    a.overview_button#home Home
+  p#settings-soon Coming soon.
+
+script(id="overview_login", type="text/html")
+  #home_parent
+    a.overview_button#home Home
+  form.form-inline
+    .control-group
+      label(for="login-username") Username
+      input#login-username(type="text")
+    .control-group
+      label(for="login-password") Password
+      input#login-password(type="password")
+    a(id="login-button", class="btn btn-primary", type="submit") Login
+
+script(id="overview_register", type="text/html")
+  #home_parent
+    a.overview_button#home Home
+  form.form-inline
+    .control-group
+      label(for="register-username") Username
+      input#register-username(type="text")
+    .control-group
+      label(for="register-password") Password
+      input#register-password(type="password")
+    a(id="register-button", class="btn btn-primary", type="button") Register
+
+script(id="titlebar", type="text/html")
+  .titlebar
+    span(class="window_title") {{title}}
+    span(id="topic") {{{topic}}}
+
+script(id="chat", type="text/html")
+  #main-window
+    #chat-window
+      #chat-bar.bar
+      #chat-contents.bar
+      #input-container.bar
+        .input
+          input(id="chat-input")
+          a(id="chat-button", class="btn disabled") Send
+    #user-window
+      #user-bar.bar
+        .titlebar
+          span(class='window_title') User List
+      #user-list.bar
+    #user-window-toggle
+      img(src="/assets/images/register.svg")
+
+script(id="channel", type="text/html")
+  span(class="channel-name") {{name}}
+  {{#notStatus}}
+  .close-button ×
+  span(class="unread", title="Unread Messages") {{unread}}
+  span(class="unread-mentions", title="Mentions in channel") {{unread_mentions}}
+  {{/notStatus}}
+
+script(id="user_box", type="text/html")
+  div.user_box_element
+    i(class="icon-user icon-white spacing-right")
+    {{nick}}
+  div.user_box_element
+    .close-button ×
+    i(class="icon-asterisk icon-white spacing-right")
+    {{server}}
+
+script(id="userlist_user", type="text/html")
+  div(class="userlist_user_activity")
+    img(src="/assets/images/{{user_status}}.png")
+    span(class="userlist_user_{{user_stats}}")
+  div(class="userlist_user_info")
+    div(class="userlist_user_name") {{role}}{{nick}}
+      span(class="userlist_user_time") {{activity}}
+
+script(id="link", type="text/html")
+  a(target="_blank", href="{{link}}") {{link}}
+
+script(id="image_embed", type="text/html")
+  div.embed-toggle
+    a.hide_embed
+      i(class="icon-chevron-up")
+    a.show_embed.hide
+      i(class="icon-chevron-down")
+  .embed
+    img(src="{{link}}")
+
+script(id="youtube_embed", type="text/html")
+  div
+    a.hide_embed
+      i(class="icon-chevron-up")
+    a.show_embed.hide
+      i(class="icon-chevron-down")
+  .embed
+    iframe(width="420", height="315", frameborder="0", allowfullscreen,
+      src="http://www.youtube.com/embed/{{video_id}}?rel=0")
+
+script(id="action", type="text/html")
+  .chat_action
+    b * {{user}}&nbsp;
+    span {{content}}
+  .chat-time
+    span {{renderedTime}}
+
+script(id="message", type="text/html")
+  .chat-name
+    b {{user}}
+  div(class="chat-message {{type}}")
+    span {{content}}
+  .chat-time
+    span {{renderedTime}}
+
+script(id="join_part", type="text/html")
+  span(class="{{type}}_img")
+  span <b>{{nick}}</b> {{action}} the channel {{reason}} {{message}}
+
+script(id="nick", type="text/html")
+  span <b>{{oldNick}}</b> is now known as {{newNick}}
+
+script(id="alert", type="text/html")
+  .alert(class = "{{type}}")
+    a(class="close", data-dismiss="alert", href="#") &times;
+    {{content}}
