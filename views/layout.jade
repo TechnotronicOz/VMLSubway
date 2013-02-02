@@ -1,13 +1,15 @@
 !!! 5
 html
   head
-    title Subway
-    link(href='/assets/images/favicon.ico', rel='icon', type='image/x-icon')
+    title VML Subway
+    link(href='/assets/images/favicon.png', rel='icon', type='image/x-icon')
     != css('bootstrap.min')
     != css('subway')
     != css('subway-mobile')
 
+    script(src="//use.typekit.net/oxp5nsn.js")
     script
+      try{Typekit.load();}catch(e){}
       var ENV = '#{env}',
           PORT = #{port};
     != js('client')

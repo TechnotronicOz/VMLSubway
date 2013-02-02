@@ -24,6 +24,7 @@ window.unity = {
 };
 
 $(function() {
+
   // window.app = new ChatApplicationRouter;
   irc.appView = new ChatApplicationView();
 
@@ -85,7 +86,11 @@ $(function() {
 
   irc.socket.on('disconnect', function() {
     alert('You were disconnected from the server.');
-    $('.container-fluid').css('opacity', '0.5');
+    $('.container-fluid').css({
+      'opacity': '0.5',
+      'filter': 'blur(5px)',
+      '-webkit-filter': 'blur(5px)'
+    });
   });
 
 
@@ -357,7 +362,7 @@ $(function() {
     var commandStore = {
       'default': function(args, command){
         // Do nothing, override it;
-      },
+      }
     };
 
     that = {

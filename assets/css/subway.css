@@ -8,7 +8,7 @@ html { overflow: hidden; }
   position: absolute;
   zoom: 1;
   padding: 0;
-  font-size: 12px;
+  font-size: 13px;
 }
 .container-fluid:before, .container-fluid:after {
   display: table;
@@ -50,20 +50,64 @@ html { overflow: hidden; }
 .sidebar > h2 {
   text-align: center;
   line-height: 0.9em;
-  margin-top: 0.3em;
+  margin-top: 1em;
+
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(69,72,77,1)), to(rgba(0,0,0,1)));
+  background: -webkit-linear-gradient(rgba(69,72,77,1) 0%, rgba(0,0,0,1) 100%);
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #fff;
+  position: relative;
+}
+
+.sidebar > h2:after {
+  background: none;
+  content: attr(data-text);
+  left: 0;
+  position: absolute;
+  text-shadow: 0 2px 5px rgba(0,0,0,.5);
+  top: 0;
+  z-index: -1;
 }
 
 #overview {
   width: 400px;
   margin: 10% auto;
   padding: 10px;
-  background: #E7E9ED;
   border: 2px solid rgba(0,0,0,.15);
   box-shadow: 0 2px 5px rgba(0,0,0,.1), inset 0 1px 2px rgba(255,255,255,.9);
   border-radius: 10px;
+  background: rgb(240,249,255);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(240,249,255,1)), color-stop(100%,rgba(211,239,255,1)));
+  background: -webkit-linear-gradient(top, rgba(240,249,255,1) 0%,rgba(211,239,255,1) 100%);
+
+
+  transform:rotatex(0) translate3d(0,0,0) scale(1);
+  -webkit-transform:rotatex(0) translate3d(0,0,0) scale(1);
+
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  -moz-backface-visibility:hidden;
+
+
+  transition:all 600ms cubic-bezier(0.86,0,0.07,1);
+  -webkit-transition:all 600ms cubic-bezier(0.86,0,0.07,1);
+
 }
 
-#overview label { width: 70px; }
+#overview.closed {
+  perspective:300px;
+  -webkit-perspective:300px;
+
+  transform-style:preserve-3d;
+  -webkit-transform-style:preserve-3d;
+
+  transform:rotatex(-220deg) translate3d(0,40%,-100px) scale(0.3);
+  -webkit-transform:rotatex(-220deg) translate3d(0,40%,-100px) scale(0.3);
+}
+
+#overview label { width: 105px; }
 #overview .controls { margin-left: 90px; }
 #overview button { margin-left: 90px; }
 
@@ -80,7 +124,10 @@ html { overflow: hidden; }
 #overview ul li:hover {
   background: #01aef0;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.2), inset 0 1px 2px rgba(255,255,255,.8);
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0,0,0,.15);
 }
 
 #overview ul li img {
@@ -120,7 +167,7 @@ html { overflow: hidden; }
 
 
 #user-box .user_box_element {
-  padding: 10px 15px 10px 25px;
+  padding: 10px 15px 10px 15px;
   background: #434950;
   color: #EEEEEE;
   font-weight: bold;
@@ -128,6 +175,7 @@ html { overflow: hidden; }
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-shadow: 0 1px 1px rgba(0,0,0,.35);
 }
 
 #user-box .user_box_element:first-child{
@@ -151,10 +199,14 @@ html { overflow: hidden; }
   cursor: pointer;
   margin-left: 5px;
   visibility: hidden;
+  transition: .2s ease-out;
+  -webkit-transition: .2s ease-out;
 }
 
 #user-box .user_box_element:hover .close-button {
   visibility: visible;
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
 }
 
 #user-box .user_box_element .close-button:hover {
@@ -167,7 +219,7 @@ html { overflow: hidden; }
 }
 
 #channels > .channel {
-  padding: 5% 5% 5% 20%;
+  padding: 5% 5% 5% 11%;
   color: #333333;
   border-bottom: 1px solid #CCCCCC;
 }
@@ -185,10 +237,14 @@ html { overflow: hidden; }
   cursor: pointer;
   margin-left: 5px;
   visibility: hidden;
+  transition: .2s ease-out;
+  -webkit-transition: .2s ease-out;
 }
 
 #channels > .channel:hover .close-button {
   visibility: visible;
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
 }
 
 #channels > .channel.active .close-button {
@@ -207,9 +263,11 @@ html { overflow: hidden; }
 }
 
 #channels > .active{
-  background: #315857;
+  background: #01aef0;
   color: whiteSmoke;
   font-weight: bold;
+  box-shadow: inset 0 1px 5px rgba(0,0,0,.2);
+  text-shadow: 0 1px 1px rgba(0,0,0,.25);
 }
 
 .channel .unread,
@@ -277,6 +335,7 @@ html { overflow: hidden; }
   padding-top: 0.5em;
   font-size: 1.2em;
   padding-left: 0.5em;
+  text-shadow: 0 1px 2px rgba(0,0,0,.5);
 }
 
 .window_title{
@@ -305,8 +364,18 @@ html { overflow: hidden; }
   position: absolute;
   bottom: 0;
   border-top: 2px solid #DDD;
-  background: whiteSmoke;
   border-right: 1px solid #DDDDDD;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(255,255,255,1)), to(rgba(229,229,229,1)));
+  background: -webkit-linear-gradient(rgba(255,255,255,1) 0%, rgba(229,229,229,1) 100%);
+}
+
+#input-container .btn {
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(119,207,239,1)), color-stop(0.4, rgba(47,188,239,1)), to(rgba(1,174,240,1)));
+  background: -webkit-linear-gradient(rgba(119,207,239,1) 0%, rgba(47,188,239,1) 40%, rgba(1,174,240,1) 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.8), 0 1px 2px rgba(0,0,0,.25);
+  border-color: rgba(0,0,0,.35);
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0,0,0,.4);
 }
 
 #input-container .input{
@@ -318,6 +387,11 @@ html { overflow: hidden; }
   margin-right: 2%;
   float: left;
   margin-left: 2%;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,.25);
+  padding: 4px 4px 4px 10px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.2), 0 1px 2px rgba(255,255,255,1);
+  outline: none;
 }
 
 #input-container .input a{
@@ -487,3 +561,6 @@ div.embed-toggle {
   color: #666666;
 }
 
+.btn {
+  font-weight: 700;
+}

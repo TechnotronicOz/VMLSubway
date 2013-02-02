@@ -4,7 +4,7 @@ script(id="chat_application", type="text/html")
       img(src='/assets/images/vml_logo.png')
     h2 Subway
       br
-      small IRC Client
+      small Dev Chat Client
     #user-box
     #channels
       #slide-prev.slide
@@ -30,7 +30,7 @@ script(id="overview_home", type="text/html")
       span Register
 
 script(id="overview", type="text/html")
-  #overview
+  #overview.closed
 
 script(id="overview_connection", type="text/html")
   #home_parent
@@ -41,7 +41,7 @@ script(id="overview_connection", type="text/html")
       input#connect-nick(type="text")
     .control-group
       label(for="connect-server") Server
-      input#connect-server(type="text")
+      input#connect-server(type="text", value="irc.freenode.net")
     .control-group
       label(for="connect-password") Password (optional)
       input#connect-password(type="password")

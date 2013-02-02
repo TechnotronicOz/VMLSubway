@@ -17,6 +17,10 @@ var OverviewView = Backbone.View.extend({
   render: function(event) {
     $(this.el).html(ich.overview());
 
+    setTimeout(function() {
+      $('#overview').removeClass('closed');
+    }, 500);
+
     // Navigation to different overview panes
     if (event === undefined) {
       $('#overview').html(ich.overview_home());
@@ -59,11 +63,11 @@ var OverviewView = Backbone.View.extend({
     password = $('#connect-password').val(),
     encoding = $('#connect-encoding').val(),
     keepAlive = false;
-    
+
     if (!server) {
       $('#connect-server').closest('.control-group').addClass('error');
     }
-    
+
     if (!nick) {
       $('#connect-nick').closest('.control-group').addClass('error');
     }
@@ -71,7 +75,7 @@ var OverviewView = Backbone.View.extend({
     if (irc.loggedIn && $('#connect-keep-alive').length) {
       keepAlive = $('#connect-keep-alive').is(':checked');
     }
-    
+
     if (nick && server) {
       $('form').append(ich.load_image());
       $('#connect-button').addClass('disabled');
@@ -107,17 +111,17 @@ var OverviewView = Backbone.View.extend({
 
     var username = $('#' + action + '-username').val();
     var password = $('#' + action + '-password').val();
- 
+
     if (!username) {
       $('#' + action + '-username').closest('.clearfix').addClass('error');
       $('#' + action + '-username').addClass('error');
     }
-    
+
     if (!password) {
       $('#' + action + '-password').closest('.clearfix').addClass('error');
       $('#login-password').addClass('error');
     }
-    
+
     if(username && password){
       $('form').append(ich.load_image());
       $('#' + action + '-button').addClass('disabled');
