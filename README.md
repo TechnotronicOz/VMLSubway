@@ -13,23 +13,17 @@ and [MongoDB](http://www.mongodb.org/) on the backend,
 and [Backbone.js](http://documentcloud.github.com/backbone/) and
 [jQuery](http://jquery.com/) on the frontend.
 
-Screenshots
-------------
-![Overview](http://people.oregonstate.edu/~petersed/overview.png)
-![Chat](http://people.oregonstate.edu/~petersed/chat.png)
 
 Installation
 ------------
 
-*Should be something like this, once implemented:*
-
 1. Assuming you already have node.js, npm, and mongo, run:
 
-        $ git clone https://github.com/thedjpetersen/subway.git
+        $ git clone https://github.com/TechnotronicOz/VMLSubway.git
         $ cd subway
 
 2. Install the dependencies using npm:
-    
+
     	$ npm install
 
 3. Launch the web server
@@ -92,7 +86,7 @@ Major Subway contributors include:
 - [Jamie Soar](http://www.jamiesoarmusic.co.uk/), notification sounds
 - Yusuke Kamiyamane, some icons
 
-**The logo right now is a Gowalla icon, we are not planning on keeping this, we are only planning on using it as a placeholder**
+Customized slightly by Matt Carter.
 
 
 License
