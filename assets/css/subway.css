@@ -257,7 +257,7 @@ html { overflow: hidden; }
 }
 
 #channels > .channel:not(.active):hover{
-  background: #A7DBD8;
+  background: #beedff;
   color: #444444;
   cursor: pointer;
 }
@@ -276,18 +276,23 @@ html { overflow: hidden; }
   margin-top: -2px;
   color: whiteSmoke;
   font-weight: bold;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
+  border-radius: 23px;
   float: right;
   display: none;
+  min-width: 12px;
+  text-align: center;
+  box-shadow: inset 0 1px 3px rgba(255,255,255,1), 0 1px 2px rgba(0,0,0,.35);
+  text-shadow: 0 1px 1px rgba(0,0,0,.6);
 }
 
 .channel .unread {
-  background: #980000;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(255,26,0,1)), to(rgba(147,0,0,1)));
+  background: -webkit-linear-gradient(rgba(255,26,0,1) 0%, rgba(147,0,0,1) 100%);
+  border: 1px solid #980000;
 }
 
 .channel .unread-mentions {
-  background: #0B2666;
+  background: #007faf;
   margin-right: 0.3em;
 }
 
